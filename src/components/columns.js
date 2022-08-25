@@ -5,7 +5,8 @@ export const COLUMNS = [
     },
     {
         Header: 'Citry',
-        accessor: 'city'
+        accessor: 'city',
+        
     },
     {
         Header: 'Population',
