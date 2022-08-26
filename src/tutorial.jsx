@@ -1,8 +1,10 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { useGlobalFilter, useSortBy, useTable } from "react-table";
 import tw from "twin.macro";
 import { GlobalFilter } from "./components/globalFilter";
 import metadata from './components/metadata.json'
+import Countries from "./components/Countries";
+
 
 
 const Table = tw.table`
@@ -47,14 +49,10 @@ const Button = tw.button`
   transition-colors
 `;
 
-export function Products() {
-  const [cities, setCities] = useState([]);
-  const [array, setArray] = useState(metadata);
-
- 
-
-  
-
+export function Products(newArray) {
+    
+    const [arr, setArr] = useState({newArray})
+    
   const columns = useMemo(
     () => [
       {
@@ -73,13 +71,13 @@ export function Products() {
     []
   );
 
-  const citiesData = useMemo(() => [...cities], [cities]);
+  const citiesData = useMemo(() => [...arr], [arr]);
 
   const citiesColumns = useMemo(
     () =>
-    cities[0]
-        ? Object.keys(cities[0])
-            .filter((key) => key !== "rating")
+    arr[0]
+        ? Object.keys(arr[0])
+            // .filter((key) => key !== "rating")
             .map((key) => {
               if (key === "image")
                 return {
@@ -92,7 +90,7 @@ export function Products() {
               return { Header: key, accessor: key };
             })
         : [],
-    [cities]
+    [arr]
   );
 
   const tableHooks = (hooks) => {
@@ -139,7 +137,9 @@ export function Products() {
 
   return (
     <>
+    
       <GlobalFilter
+       
         preGlobalFilteredRows={preGlobalFilteredRows}
         setGlobalFilter={setGlobalFilter}
         globalFilter={state.globalFilter}
@@ -178,6 +178,9 @@ export function Products() {
           })}
         </TableBody>
       </Table>
+      
+      <div onClick={() => console.log({...arr})}> 123</div>
+      
     </>
   );
 }

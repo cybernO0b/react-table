@@ -27,8 +27,8 @@ function App() {
   return (
     <AppContainer>
       <Title>React Tables</Title>
-      <Products />
       <Countries/>
+      <Products />
     </AppContainer>
   );
 }

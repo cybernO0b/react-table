@@ -1,14 +1,21 @@
 import React, { useState, useEffect } from "react";
 import metadata from './metadata.json';
 import './Search.css'
+import { Products } from "../tutorial";
+
 
 
 const Countries = () => {
-
+    
+    
   const [cityList, setCity] = useState(metadata)
   const [value, setValue] = useState("")
   const [isOpen, setIsOpen] = useState(true)
   const [newArray, setNewArray] = useState([])
+  
+  
+  
+
   
 const filteredCountries = cityList.filter(el => {
     return el.city.toLowerCase().includes(value.toLowerCase())
