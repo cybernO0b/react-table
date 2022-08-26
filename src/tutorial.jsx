@@ -4,6 +4,7 @@ import tw from "twin.macro";
 import { GlobalFilter } from "./components/globalFilter";
 import metadata from './components/metadata.json'
 
+
 const Table = tw.table`
   table-fixed
   text-base
@@ -46,8 +47,9 @@ const Button = tw.button`
   transition-colors
 `;
 
-export function Products(props) {
-  const [cities, setCities] = useState(metadata);
+export function Products() {
+  const [cities, setCities] = useState([]);
+  const [array, setArray] = useState(metadata);
 
  
 
@@ -130,7 +132,7 @@ export function Products(props) {
   } = tableInstance;
 
 //   useEffect(() => {
-//     fetchCities();
+//    newArray();
 //   }, []);
 
   const isEven = (idx) => idx % 2 === 0;

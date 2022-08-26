@@ -3,6 +3,7 @@ import "./App.css";
 
 import tw from "twin.macro";
 import { Products } from "./tutorial";
+import Countries from "./components/Countries";
 
 const AppContainer = tw.div`
   w-full
@@ -27,6 +28,7 @@ function App() {
     <AppContainer>
       <Title>React Tables</Title>
       <Products />
+      <Countries/>
     </AppContainer>
   );
 }
