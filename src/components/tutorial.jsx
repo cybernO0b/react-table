@@ -1,8 +1,8 @@
 import React, { useMemo, useState } from "react";
 import { useGlobalFilter, useSortBy, useTable } from "react-table";
 import tw from "twin.macro";
-import { GlobalFilter } from "./components/globalFilter";
-import Countries from "./components/Countries";
+import { GlobalFilter } from "./globalFilter";
+import Countries from "./Countries";
 
 
 
@@ -48,7 +48,7 @@ const Button = tw.button`
   transition-colors
 `;
 
-    export function Products() {
+    export function Tables() {
       
 
       const [arr, setArr] = useState([]) // здесь наверное должен быть массив newArray из Countries.jsx

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import metadata from './metadata.json';
-import './Search.css'
+import './search.css'
 
 
 
