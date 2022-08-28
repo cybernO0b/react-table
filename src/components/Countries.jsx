@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import metadata from './metadata.json';
 import './Search.css'
-import { Products } from "../tutorial";
+
 
 
 
@@ -14,15 +14,10 @@ const Countries = () => {
   const [newArray, setNewArray] = useState([])
   
   
-  
-
-  
 const filteredCountries = cityList.filter(el => {
     return el.city.toLowerCase().includes(value.toLowerCase())
 })
 const itemClickHandler = () => {
-    
-    
     setValue("")
     setIsOpen(!isOpen)
     console.log(newArray)
@@ -32,6 +27,7 @@ const inputClickHandler = () => {
 }
 
     return (
+        <>
         <div>
             <div className="form">
                 <form className="search__form">
@@ -54,7 +50,8 @@ const inputClickHandler = () => {
                                   onClick={itemClickHandler}
                                    key={index}
                                   >
-                                    <div onClick={() => setValue(newArray.push(cities))}>{cities.city}, {cities.region}</div>
+                                        <div onClick={() =>{setValue(newArray.push(cities))}}>
+                                        {cities.city}, {cities.region}</div>
                                      </li>
                                     )
                                 })
@@ -64,6 +61,8 @@ const inputClickHandler = () => {
                 </form>
             </div>
         </div>
+       
+        </>
     )
 }
 

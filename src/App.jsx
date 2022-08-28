@@ -28,7 +28,7 @@ function App() {
     <AppContainer>
       <Title>React Tables</Title>
       <Countries/>
-      <Products />
+      <Products/>
     </AppContainer>
   );
 }

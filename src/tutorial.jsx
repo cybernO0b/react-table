@@ -2,7 +2,6 @@ import React, { useMemo, useState } from "react";
 import { useGlobalFilter, useSortBy, useTable } from "react-table";
 import tw from "twin.macro";
 import { GlobalFilter } from "./components/globalFilter";
-import metadata from './components/metadata.json'
 import Countries from "./components/Countries";
 
 
@@ -49,10 +48,10 @@ const Button = tw.button`
   transition-colors
 `;
 
-export function Products(newArray) {
-    
-    const [arr, setArr] = useState({newArray})
-    
+    export function Products() {
+      
+
+      const [arr, setArr] = useState([]) // здесь наверное должен быть массив newArray из Countries.jsx
   const columns = useMemo(
     () => [
       {
@@ -70,14 +69,14 @@ export function Products(newArray) {
     ],
     []
   );
-
+  
   const citiesData = useMemo(() => [...arr], [arr]);
 
   const citiesColumns = useMemo(
     () =>
     arr[0]
         ? Object.keys(arr[0])
-            // .filter((key) => key !== "rating")
+            .filter((key) => key !== "rating")
             .map((key) => {
               if (key === "image")
                 return {
@@ -100,7 +99,7 @@ export function Products(newArray) {
         id: "Edit",
         Header: "Edit",
         Cell: ({ row }) => (
-          <Button onClick={() => alert("Editing: " + row.values.price)}>
+          <Button onClick={() => alert("Editing: " + row.value.price)}>
             Edit
           </Button>
         ),
@@ -129,21 +128,20 @@ export function Products(newArray) {
     state,
   } = tableInstance;
 
-//   useEffect(() => {
-//    newArray();
-//   }, []);
+
 
   const isEven = (idx) => idx % 2 === 0;
 
   return (
     <>
     
-      <GlobalFilter
+      {/* <GlobalFilter
        
         preGlobalFilteredRows={preGlobalFilteredRows}
         setGlobalFilter={setGlobalFilter}
         globalFilter={state.globalFilter}
-      />
+      /> */}
+      
       <Table {...getTableProps()}>
         <TableHead>
           {headerGroups.map((headerGroup) => (
@@ -178,8 +176,6 @@ export function Products(newArray) {
           })}
         </TableBody>
       </Table>
-      
-      <div onClick={() => console.log({...arr})}> 123</div>
       
     </>
   );
