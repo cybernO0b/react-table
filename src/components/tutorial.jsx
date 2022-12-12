@@ -1,8 +1,10 @@
 import React, { useMemo, useState } from "react";
 import { useGlobalFilter, useSortBy, useTable } from "react-table";
+import { useDispatch, useSelector } from "react-redux";
 import tw from "twin.macro";
-import { GlobalFilter } from "./globalFilter";
-import Countries from "./Countries";
+import { removeCitiesAction } from "./store/citiesReducer";
+
+
 
 
 
@@ -49,9 +51,16 @@ const Button = tw.button`
 `;
 
     export function Tables() {
+      const dispatch = useDispatch()
+    
+    const arr = useSelector(state => state.cities.cities)
+
+    const removeCities = (cities) => {
+      dispatch(removeCitiesAction(cities.id))
+  }
       
 
-      const [arr, setArr] = useState([]) // здесь наверное должен быть массив newArray из Countries.jsx
+      // const [arr, setArr] = useState([]) // здесь наверное должен быть массив newArray из Countries.jsx
   const columns = useMemo(
     () => [
       {
@@ -98,9 +107,9 @@ const Button = tw.button`
       {
         id: "Edit",
         Header: "Edit",
-        Cell: ({ row }) => (
-          <Button onClick={() => alert("Editing: " + row.value.price)}>
-            Edit
+        Cell: ({ cities }) => (
+          <Button onClick={() => console.log(cities)}>
+            Delete
           </Button>
         ),
       },
@@ -131,7 +140,7 @@ const Button = tw.button`
 
 
   const isEven = (idx) => idx % 2 === 0;
-
+  
   return (
     <>
     

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import metadata from './metadata.json';
-import './search.css'
+import {addCitiesAction, removeCitiesAction} from "./store/citiesReducer"
+import './Search.css'
 
 
 
@@ -8,19 +10,37 @@ import './search.css'
 const Countries = () => {
     
     
-  const [cityList, setCity] = useState(metadata)
+//   const [cityList, setCity] = useState(metadata)
   const [value, setValue] = useState("")
   const [isOpen, setIsOpen] = useState(true)
-  const [newArray, setNewArray] = useState([])
+//   const [newArray, setNewArray] = useState([])
   
+    const dispatch = useDispatch()
+    
+    const newArray = useSelector(state => state.cities.cities)
+
+    const addCities = (city, region) => {
+        const cities = {
+            city,
+            region,
+            
+        }
+    dispatch(addCitiesAction(cities))
+}
+
+    const removeCities = (cities) => {
+        dispatch(removeCitiesAction(cities.id))
+    }
+    
   
-const filteredCountries = cityList.filter(el => {
+const filteredCountries = metadata.filter(el => {
     return el.city.toLowerCase().includes(value.toLowerCase())
 })
-const itemClickHandler = () => {
+const itemClickHandler = (e) => {
     setValue("")
     setIsOpen(!isOpen)
     console.log(newArray)
+    
 }
 const inputClickHandler = () => {
     setIsOpen(true) 
@@ -50,7 +70,7 @@ const inputClickHandler = () => {
                                   onClick={itemClickHandler}
                                    key={index}
                                   >
-                                        <div onClick={() =>{setValue(newArray.push(cities))}}>
+                                        <div onClick={() => addCities(cities.city, cities.region)  }>
                                         {cities.city}, {cities.region}</div>
                                      </li>
                                     )
