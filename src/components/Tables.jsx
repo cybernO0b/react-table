@@ -1,11 +1,8 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import { useGlobalFilter, useSortBy, useTable } from "react-table";
 import { useDispatch, useSelector } from "react-redux";
 import tw from "twin.macro";
 import { removeCitiesAction } from "./store/citiesReducer";
-
-
-
 
 
 const Table = tw.table`
@@ -55,29 +52,9 @@ const Button = tw.button`
     
     const arr = useSelector(state => state.cities.cities)
 
-    const removeCities = (cities) => {
-      dispatch(removeCitiesAction(cities.id))
-  }
-      
-
-      // const [arr, setArr] = useState([]) // здесь наверное должен быть массив newArray из Countries.jsx
-  const columns = useMemo(
-    () => [
-      {
-        Header: "Id",
-        accessor: "id",
-      },
-      {
-        Header: "Price",
-        accessor: "price",
-      },
-      {
-        Header: "Title",
-        accessor: "title",
-      },
-    ],
-    []
-  );
+    const removeCities = (id) => {
+      dispatch(removeCitiesAction(id));
+    };
   
   const citiesData = useMemo(() => [...arr], [arr]);
 
@@ -91,7 +68,7 @@ const Button = tw.button`
                 return {
                   Header: key,
                   accessor: key,
-                  Cell: ({ value }) => <img src={value} />,
+                  Cell: ({ value }) => <div>123</div>,
                   maxWidth: 70,
                 };
 
@@ -105,17 +82,16 @@ const Button = tw.button`
     hooks.visibleColumns.push((columns) => [
       ...columns,
       {
-        id: "Edit",
-        Header: "Edit",
-        Cell: ({ cities }) => (
-          <Button onClick={() => console.log(cities)}>
-            Delete
-          </Button>
+        id: "Delete",
+        Header: "Delete",
+        Cell: ({ row }) => (
+          <Button onClick={() => removeCities(row.original.id)}>Delete</Button>
         ),
       },
     ]);
   };
 
+  
   const tableInstance = useTable(
     {
       columns: citiesColumns,
@@ -132,9 +108,6 @@ const Button = tw.button`
     headerGroups,
     rows,
     prepareRow,
-    preGlobalFilteredRows,
-    setGlobalFilter,
-    state,
   } = tableInstance;
 
 
@@ -144,12 +117,7 @@ const Button = tw.button`
   return (
     <>
     
-      {/* <GlobalFilter
-       
-        preGlobalFilteredRows={preGlobalFilteredRows}
-        setGlobalFilter={setGlobalFilter}
-        globalFilter={state.globalFilter}
-      /> */}
+     
       
       <Table {...getTableProps()}>
         <TableHead>

@@ -1,8 +1,5 @@
-
-import "./App.css";
-
 import tw from "twin.macro";
-import { Tables } from "./components/tutorial";
+import { Tables } from "./components/Tables";
 import Countries from "./components/Countries";
 
 const AppContainer = tw.div`

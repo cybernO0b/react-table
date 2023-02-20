@@ -1,38 +1,22 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import metadata from './metadata.json';
-import {addCitiesAction, removeCitiesAction} from "./store/citiesReducer"
+import { addCitiesAction } from "./store/citiesReducer"
 import './Search.css'
 
 
-
-
 const Countries = () => {
-    
-    
-//   const [cityList, setCity] = useState(metadata)
   const [value, setValue] = useState("")
   const [isOpen, setIsOpen] = useState(true)
-//   const [newArray, setNewArray] = useState([])
-  
-    const dispatch = useDispatch()
-    
-    const newArray = useSelector(state => state.cities.cities)
-
-    const addCities = (city, region) => {
+  const dispatch = useDispatch()
+  const newArray = useSelector(state => state.cities.cities)
+  const addCities = (city, region) => {
         const cities = {
             city,
-            region,
-            
+            region
         }
     dispatch(addCitiesAction(cities))
 }
-
-    const removeCities = (cities) => {
-        dispatch(removeCitiesAction(cities.id))
-    }
-    
-  
 const filteredCountries = metadata.filter(el => {
     return el.city.toLowerCase().includes(value.toLowerCase())
 })
@@ -45,7 +29,6 @@ const itemClickHandler = (e) => {
 const inputClickHandler = () => {
     setIsOpen(true) 
 }
-
     return (
         <>
         <div>
