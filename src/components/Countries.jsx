@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import metadata from './metadata.json';
 import { addCitiesAction } from "./store/citiesReducer"
 import './Search.css'
+import { v4 as uuidv4 } from 'uuid';
 
 
 const Countries = () => {
@@ -12,6 +13,7 @@ const Countries = () => {
   const newArray = useSelector(state => state.cities.cities)
   const addCities = (city, region) => {
         const cities = {
+            id: uuidv4(),
             city,
             region
         }
